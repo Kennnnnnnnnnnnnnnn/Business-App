@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'screen.dart';
+
 class HomeScreen extends StatelessWidget {
   final PageController pageController;
+
   final List<String> images;
 
   const HomeScreen({required this.pageController, required this.images});

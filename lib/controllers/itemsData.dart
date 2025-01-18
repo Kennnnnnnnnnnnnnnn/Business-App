@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 class MyState extends GetxController {
   var products = [
     {

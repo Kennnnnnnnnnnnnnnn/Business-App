@@ -1,19 +1,13 @@
+import 'package:business_project/controllers/cartController.dart';
+import 'package:business_project/controllers/favController.dart';
 import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(MaterialApp(
-//       home: Cards(
-//     name: 'Product 1', // Add required properties
-//     iamge: 'assets/shoe1.png', // Add required properties
-//     price: "19", // Add required properties
-//   )));
-// }
+import 'package:get/get.dart';
 
 class Cards extends StatefulWidget {
-  // const Cards({super.key});
   final String name;
   final String iamge;
   final String price;
+
   Cards({
     required this.name,
     required this.iamge,
@@ -25,6 +19,9 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
+  final CartsController cartsController = Get.put(CartsController());
+  final FavoriteController favoriteController = Get.put(FavoriteController());
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -34,6 +31,7 @@ class _CardsState extends State<Cards> {
       child: Column(
         children: [
           ClipRRect(
+            borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               widget.iamge,
               height: 120,
@@ -50,18 +48,17 @@ class _CardsState extends State<Cards> {
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
-              softWrap: true,
-              overflow: TextOverflow.visible,
             ),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              widget.price,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              '\$${widget.price}',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
-              softWrap: true,
-              overflow: TextOverflow.visible,
             ),
           ),
           Padding(
@@ -71,14 +68,22 @@ class _CardsState extends State<Cards> {
               children: [
                 IconButton(
                   onPressed: () {
-                    // Add functionality for the + button
-                    print('Added ${widget.name} to Favorite');
+                    favoriteController.addItem({
+                      'name': widget.name,
+                      'image': widget.iamge,
+                      'price': widget.price,
+                    });
+                    print('Added ${widget.name} to favorites');
                   },
                   icon: Icon(Icons.favorite, color: Colors.red, size: 30),
                 ),
                 IconButton(
                   onPressed: () {
-                    // Add functionality for the + button
+                    cartsController.addItem({
+                      'name': widget.name,
+                      'image': widget.iamge,
+                      'price': widget.price,
+                    });
                     print('Added ${widget.name} to cart');
                   },
                   icon: Icon(Icons.add_circle, color: Colors.green, size: 30),

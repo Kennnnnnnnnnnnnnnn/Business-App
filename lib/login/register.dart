@@ -1,14 +1,9 @@
-import 'package:business_project/login/setup.dart';
+import 'package:business_project/controllers/UserController.dart';
+import 'package:business_project/login/databaseService.dart';
+import 'package:business_project/login/login.dart';
 import 'package:business_project/login/user_info.dart';
-import 'package:business_project/screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Register(),
-  ));
-}
-
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -17,6 +12,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,23 +20,22 @@ class _RegisterState extends State<Register> {
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 40.0),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              const Color.fromARGB(255, 127, 18, 236),
-              const Color.fromARGB(255, 184, 33, 70)
-            ]),
-          ),
+          color: const Color.fromARGB(255, 211, 196, 219),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Registration",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              nameBox(),
               SizedBox(
                 height: 20,
               ),
@@ -52,20 +47,51 @@ class _RegisterState extends State<Register> {
               SizedBox(
                 height: 20,
               ),
-              confirmpassBox(),
+              phoneBox(),
               SizedBox(
                 height: 20,
               ),
+              // ElevatedButton(
+              //     onPressed: () async {
+              //       final user = Usercontroller(
+              //           name: nameController.text,
+              //           phone_num: phoneController.text,
+              //           email: emailController.text);
+              //       await dbService.create(user);
+              //       await signUp();
+              //       Navigator.push(context,
+              //           MaterialPageRoute(builder: (context) => Login()));
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //       foregroundColor: Colors.black,
+              //       backgroundColor: const Color.fromARGB(255, 169, 96, 141),
+              //     ),
+              //     child: Text('Complete'))
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Setup()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: const Color.fromARGB(255, 169, 96, 141),
-                  ),
-                  child: Text('Sign up'))
+                onPressed: () async {
+                  User? userAuth = await signUp();
+                  if (userAuth != null) {
+                    final user = Usercontroller(
+                      uid: userAuth.uid, // Pass the user's UID here
+                      name: nameController.text,
+                      phone_num: phoneController.text,
+                      email: emailController.text,
+                    );
+                    await dbService.create(user);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  } else {
+                    print("Sign up failed");
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: const Color.fromARGB(255, 169, 96, 141),
+                ),
+                child: Text('Complete'),
+              )
             ],
           ),
         ),

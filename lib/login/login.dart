@@ -1,16 +1,9 @@
 import 'package:business_project/login/register.dart';
 import 'package:business_project/login/user_info.dart';
 import 'package:business_project/reuseable_classes.dart';
+import 'package:business_project/screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:flutter/services.dart';
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Login(),
-  ));
-}
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -25,25 +18,34 @@ class Login_State extends State<Login> {
     return Scaffold(
       body: Center(
         child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                const Color.fromARGB(255, 127, 18, 236),
-                const Color.fromARGB(255, 184, 33, 70)
-              ]),
-            ),
+            color: const Color.fromARGB(255, 211, 196, 219),
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Logo('image'),
+                Logo('shoeLogo'),
                 SizedBox(
                   height: 5,
                 ),
                 Text(
-                  'Heng Panha',
+                  'Step & Stride',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25, 
+                    fontFamily:
+                        'Poppins', 
+                    letterSpacing:
+                        1.5, 
+                    shadows: [
+                      Shadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 4,
+                        offset: Offset(2, 2), 
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -57,9 +59,13 @@ class Login_State extends State<Login> {
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await signIp();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Screen()));
+                    },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      foregroundColor: Colors.black,
                       backgroundColor: const Color.fromARGB(255, 169, 96, 141),
                     ),
                     child: Text('Login')),
