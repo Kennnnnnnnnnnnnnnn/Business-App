@@ -12,7 +12,6 @@ import 'package:business_project/products/carts.dart';
 import 'package:business_project/controllers/itemsData.dart';
 import 'package:business_project/login/databaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,7 +65,6 @@ class _ScreenState extends State<Screen> {
         );
       }
     });
-
     // Fetch user data
     fetchUserData();
   }

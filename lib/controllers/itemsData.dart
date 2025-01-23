@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+
 class MyState extends GetxController {
   var products = [
     {
       "id": "1",
-      "name": " Neon Futuristic Metaverse",
+      "name": "Neon Futuristic Meta1234",
       "image": "assets/product1.png",
       "price": 19.99,
     },
@@ -20,7 +21,7 @@ class MyState extends GetxController {
       "price": 39.99,
     },
     {
-      "id": "3",
+      "id": "4",
       "name": "Runnning Shoes",
       "image": "assets/product4.png",
       "price": 30.99,

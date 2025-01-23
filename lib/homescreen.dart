@@ -115,23 +115,28 @@ class HomeScreen extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Obx(() => GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.9,
-                ),
-                itemCount: myState.products.length,
-                itemBuilder: (context, index) {
-                  final product = myState.products[index];
-                  return Cards(
-                    name: product['name'] as String,
-                    price: '\$${product['price']}',
-                    iamge: product['image'] as String,
-                  );
-                },
-              )),
+
+          Obx(() {
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.80,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: myState.products.length,
+              itemBuilder: (context, index) {
+                final product = myState.products[index];
+                return Cards(
+                  name: product['name'] as String,
+                  price: product['price'] as num,
+                  iamge: product['image'] as String,
+                );
+              },
+            );
+          }),
         ],
       ),
     );

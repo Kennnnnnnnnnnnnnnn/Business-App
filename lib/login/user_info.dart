@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'databaseService.dart';
@@ -25,12 +24,12 @@ Future<User?> signUp() async {
   }
 }
 
-Future<User?> signIp() async {
+Future<User?> signIn() async {
   String email = emailController.text;
   String password = passController.text;
-  User? user = await auth.signInWIthEmailAnndPasswd(email, password);
+  User? user = await auth.signInWithEmailAndPassword(email, password);
   if (user != null) {
-    print("User is successfully created");
+    print("User is successfully login");
     return user;
   } else {
     print("Something is wrong");

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class Cards extends StatefulWidget {
   final String name;
   final String iamge;
-  final String price;
+  final num price;
 
   Cards({
     required this.name,
@@ -29,16 +29,18 @@ class _CardsState extends State<Cards> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: const Color.fromARGB(255, 220, 196, 194),
       child: Column(
+        mainAxisSize: MainAxisSize.min, 
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               widget.iamge,
               height: 120,
-              width: 120,
+              width: double.infinity, 
               fit: BoxFit.cover,
             ),
           ),
+        
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
@@ -48,8 +50,11 @@ class _CardsState extends State<Cards> {
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
+              maxLines: 2, 
+              overflow: TextOverflow.ellipsis,
             ),
           ),
+      
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
@@ -61,6 +66,7 @@ class _CardsState extends State<Cards> {
               textAlign: TextAlign.center,
             ),
           ),
+    
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(

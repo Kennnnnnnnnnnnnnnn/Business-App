@@ -25,4 +25,8 @@ class CartsController extends GetxController {
     cartItems.removeAt(index);
     cartItemCount.value = cartItems.length; // Update cart item count
   }
+  void clearCart() {
+    cartItems.clear();
+    cartItemCount.value = 0; // Update cart item count
+  }
 }

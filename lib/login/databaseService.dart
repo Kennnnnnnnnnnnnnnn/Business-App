@@ -101,14 +101,16 @@ class FirebaseAuthService {
     return null;
   }
 
-  Future<User?> signInWIthEmailAnndPasswd(String email, String password) async {
-    try {
-      UserCredential credential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return credential.user;
-    } catch (e) {
-      print("Something wrong");
-    }
+Future<User?> signInWithEmailAndPassword(String email, String password) async {
+  try {
+    UserCredential credential = await auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return credential.user;
+  } catch (e) {
+    print("Something went wrong: $e");
     return null;
   }
+}
 }
